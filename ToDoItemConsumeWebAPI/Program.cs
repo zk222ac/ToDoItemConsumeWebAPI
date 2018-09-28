@@ -95,9 +95,20 @@ namespace ToDoItemConsumeWebAPI
                             Console.WriteLine("Insert IsCompleted for editing..........");
                             updateNewByIdToDoItem.IsComplete = Console.ReadLine();
                             UpdateToDoItemAsync(updateNewByIdToDoItem , updateId);
-                            // after update we need to check the item with that specific id and show
-                            var updateItemGetByIdResult = await GetToDoItemByIdAsync(updateId);
-                            ShowToDoItemObj(updateItemGetByIdResult);
+                            // Nested Switch loop
+                            Console.WriteLine("Do you wanna see the update changes on the screen!.........");
+                            Console.WriteLine("Kindly Enter --> PutGet");
+                            httpVerb = Console.ReadLine();
+                            if (httpVerb != null)
+                                switch (httpVerb.ToUpper())
+                                {
+                                    // Nested Switch Case because after update we need to check
+                                    // the item with that specific id is updated or not (it is also display on screen) 
+                                    case "PUTGET":
+                                        var updateItemGetByIdResult = await GetToDoItemByIdAsync(updateId);
+                                        ShowToDoItemObj(updateItemGetByIdResult);
+                                        break;
+                                }
                             break;
                         case "DELETE":
                             Console.WriteLine("Insert specific Id for deleting..........");
